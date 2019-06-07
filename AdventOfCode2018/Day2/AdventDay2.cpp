@@ -3,23 +3,16 @@
 #include <string>
 #include <stdio.h>
 #include <set>
-
+#include <vector>
 const int SIZE = 7;
 using namespace std;
 void part1(ifstream &);
-void load(ifstream &, set<string> &);
-void part2(set<string> &);
-/*struct node
-{
-	struct node *child[27];
-	bool isWord=false;
-	int counter=0;
-	data 
-};
-*/
+void load(ifstream &, vector<string> &);
+void part2(vector<string> &);
+
 int main() 
 { 
-	set<string> inputs;
+	vector<string> inputs;
 	ifstream infile;
 	part1(infile);
 	load(infile,inputs);
@@ -29,7 +22,7 @@ int main()
 
 	///Part 2 Let the punches roll
 	
-	char input [SIZE];
+
 }
 void part1(ifstream & infile)
 {
@@ -82,42 +75,51 @@ void part1(ifstream & infile)
 	cout << tw << " " << thr << endl;
 	cout << tw * thr << endl;
 }
-void load(ifstream &infile,set<string> &inputs)
+void load(ifstream &infile,vector<string> &inputs)
 {	string word;
 
     infile.seekg(ios_base::beg);
 	cout << "Put to beginning"<< endl;
 	infile >> word;
-	cout << word << endl;
 	while(infile.eof())
 	{
-		inputs.insert(word);
+		inputs.push_back(word);
 		infile>> word;
 	}
 	cout << "Loaded." << endl;
 	infile.close();
 }
-void part2(set<string> &inputs)
+void part2(vector<string> &inputs)
 {
 	cout << "Aim" << endl;
-	int count=0;
+	int vecSize=inputs.size();
 	int counter=0;
-	int target1=0;
-	int target2=1;
+
 	int sim=0;
 	int maxsim=0;
 	string test1;
 	string test2;
-	set<string>::iterator it=inputs.begin();
+	cout << "Reach"<< endl;
+	
+	vector<string>::iterator it=inputs.begin();
+	vector<string>::iterator it2=inputs.begin();
+	vector<string>::iterator save;
+	vector<string>::iterator save2;
+	it2++;
+	cout << "Maybe" << endl;
 	while(it!=inputs.end())
 	{
 		counter++;
-		test1=(*it);
-		while(it!=inputs.end())
+		it2=inputs.begin();
+		advance(it2,counter);
+		
+		test1=*it;// Error here...
+		cout << "Here"<< endl;
+		cout << test1<< endl;
+		while(it2!=inputs.end())
 		{
-			it++;
-			test2=(*it);
-			count++;
+			
+			test2=(*it2);
 			for(int x=0; x<SIZE; x++)// iterate through each letter
 			{
 				if (test1.at(x)==test2.at(x))
@@ -125,42 +127,21 @@ void part2(set<string> &inputs)
 					sim++;// Count amount of similarities in a comparisons
 				}
 			}
+			cout << "Shoot" << endl;
 			if(sim>maxsim)
 			{
-				target1=counter-1;//Find first line
-				target2=counter+count-1;// Math is shoddy
+				save=it;//Find first line
+				save2=it2;// Math is shoddy
 				maxsim=sim;
 			}
+			it2++;
 		}
-
-		it=inputs.begin();
-		advance(it,counter);
+		it++;
 	}
-	it=inputs.begin();
-	advance(it,target1);
-	cout << (*it)<< endl;
-	it=inputs.begin();
-	advance(it,target2);
-	cout << (*it)<< endl;
+
+	cout << (*save)<< endl;
+
+	cout << (*save2)<< endl;
 	cout << maxsim << "similarities."<< endl;
 	cout << "Fire!"<< endl;
 }
-
-	/*node *trav;// initialize moving pointer
-	
-	char input[SIZE];
-	node tree;// Initialize tree
-	infile.beg;
-	while (infile.eof())
-	{
-		infile >>input;
-		trav=&tree;// Pointer to tree.
-		for(int x; x<SIZE;x++)
-		{
-			trav->child[input[x]-141];
-			trav->isWord=true;
-			trav->counter++;
-
-		}
-	}
-	*/
