@@ -81,12 +81,15 @@ void load(ifstream &infile,vector<string> &inputs)
     infile.seekg(ios_base::beg);
 	cout << "Put to beginning"<< endl;
 	infile >> word;
+	cout << word;
 	while(infile.eof())
 	{
 		inputs.push_back(word);
-		infile>> word;
+		infile >> word;
+		cout << word;
 	}
 	cout << "Loaded." << endl;
+	cout << inputs.at(2)<< endl;
 	infile.close();
 }
 void part2(vector<string> &inputs)
@@ -94,35 +97,25 @@ void part2(vector<string> &inputs)
 	cout << "Aim" << endl;
 	int vecSize=inputs.size();
 	int counter=0;
-
+	string solution,solution2;
 	int sim=0;
 	int maxsim=0;
 	string test1;
 	string test2;
 	cout << "Reach"<< endl;
-	
-	vector<string>::iterator it=inputs.begin();
-	vector<string>::iterator it2=inputs.begin();
-	vector<string>::iterator save;
-	vector<string>::iterator save2;
-	it2++;
 	cout << "Maybe" << endl;
-	while(it!=inputs.end())
+	for(int x=0; x<(vecSize-1); x++)
 	{
-		counter++;
-		it2=inputs.begin();
-		advance(it2,counter);
-		
-		test1=*it;// Error here...
+		test1=inputs.at(x);
 		cout << "Here"<< endl;
 		cout << test1<< endl;
-		while(it2!=inputs.end())
+		for(int y=x+1;y<vecSize;y++)
 		{
-			
-			test2=(*it2);
-			for(int x=0; x<SIZE; x++)// iterate through each letter
+			test2=inputs.at(y);
+
+			for(int z=0; z<SIZE; z++)// iterate through each letter
 			{
-				if (test1.at(x)==test2.at(x))
+				if (test1.at(z)==test2.at(z))
 				{
 					sim++;// Count amount of similarities in a comparisons
 				}
@@ -130,18 +123,26 @@ void part2(vector<string> &inputs)
 			cout << "Shoot" << endl;
 			if(sim>maxsim)
 			{
-				save=it;//Find first line
-				save2=it2;// Math is shoddy
+				solution=test1;//Find first line
+				solution2=test2;// Math is shoddy
 				maxsim=sim;
 			}
-			it2++;
+			
 		}
-		it++;
+		
 	}
 
-	cout << (*save)<< endl;
+	cout << solution << endl;
 
-	cout << (*save2)<< endl;
-	cout << maxsim << "similarities."<< endl;
+	cout << solution2<< endl;
+	cout << maxsim << " similarities."<< endl;
 	cout << "Fire!"<< endl;
+	for(int z=0; z<SIZE; z++)// iterate through each letter
+	{
+		if (solution.at(z)==solution2.at(z))
+		{
+			cout << solution.at(z);// Count amount of similarities in a comparisons
+		}
+	}
+	cout << endl<< "Fin";
 }
