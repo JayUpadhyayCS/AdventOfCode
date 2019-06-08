@@ -1,10 +1,10 @@
+#include <string>
 #include <iostream>
 #include <fstream>
-#include <string>
 #include <stdio.h>
 #include <set>
 #include <vector>
-const int SIZE = 7;
+const int SIZE = 27;
 using namespace std;
 void part1(ifstream &);
 void load(ifstream &, vector<string> &);
@@ -32,7 +32,7 @@ void part1(ifstream & infile)
 	int three = 0;
 	char input[SIZE];
 	int counter = 0;
-	infile.open("C:\\Users\\Jay\\Desktop\\Advent2018\\AdventOfCode2018\\AdventOfCode2018\\Day2\\TestInput.txt");
+	infile.open("C:\\Users\\Jay\\Desktop\\Advent2018\\AdventOfCode2018\\AdventOfCode2018\\Day2\\Input.txt");
 	
 	while (!infile.eof()) 
 	{
@@ -82,14 +82,14 @@ void load(ifstream &infile,vector<string> &inputs)
 	cout << "Put to beginning"<< endl;
 	infile >> word;
 	cout << word;
-	while(infile.eof())
+	while(!infile.eof())
 	{
-		inputs.push_back(word);
+		inputs.push_back (word);
 		infile >> word;
 		cout << word;
 	}
 	cout << "Loaded." << endl;
-	cout << inputs.at(2)<< endl;
+	cout << inputs.at(1)<< endl;
 	infile.close();
 }
 void part2(vector<string> &inputs)
@@ -111,9 +111,10 @@ void part2(vector<string> &inputs)
 		cout << test1<< endl;
 		for(int y=x+1;y<vecSize;y++)
 		{
+			sim = 0;
 			test2=inputs.at(y);
 
-			for(int z=0; z<SIZE; z++)// iterate through each letter
+			for(int z=0; z<(SIZE-1); z++)// iterate through each letter
 			{
 				if (test1.at(z)==test2.at(z))
 				{
@@ -137,7 +138,7 @@ void part2(vector<string> &inputs)
 	cout << solution2<< endl;
 	cout << maxsim << " similarities."<< endl;
 	cout << "Fire!"<< endl;
-	for(int z=0; z<SIZE; z++)// iterate through each letter
+	for(int z=0; z<SIZE-1; z++)// iterate through each letter
 	{
 		if (solution.at(z)==solution2.at(z))
 		{
