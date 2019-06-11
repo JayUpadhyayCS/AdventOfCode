@@ -23,7 +23,7 @@
     <Text Include="Day2\TestInput.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Day2\AdventDay2.cpp" />
+    <ClCompile Include="Day3\AdventDay3.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>

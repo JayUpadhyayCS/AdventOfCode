@@ -23,7 +23,7 @@
     </Text>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Day2\AdventDay2.cpp">
+    <ClCompile Include="Day3\AdventDay3.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
