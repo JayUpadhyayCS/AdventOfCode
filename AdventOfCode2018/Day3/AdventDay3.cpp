@@ -53,5 +53,34 @@ int main()
 		}
 	}
 	cout << count<< " is number of overlapping claims."<< endl;
+	infile.clear();
+	infile.seekg(ios::beg);
+	while (!infile.eof())
+	{
+		int number;
+		bool found=true;
 
+		//#1 @ 265,241: 16x26
+		infile >> c >> number >> c >> num1 >> c >> num2 >> c >> height >> c >> width;// Height and width are the last numbers. num1 and num2 are the coordinates of origin.
+		if (!infile)
+		{
+			cout << "Error" << endl;
+			exit(3);
+		}
+		for (int x = 0; x < height; x++)
+		{
+			for (int y = 0; y < width; y++)
+			{
+				if (col.at(num1 + x).at(num2 + y) != 1)
+				{
+					found = false;
+				}
+
+			}
+		}
+		if (found == true)
+		{
+			cout << number << " is the answer" << endl;
+		}
+	}
 }
