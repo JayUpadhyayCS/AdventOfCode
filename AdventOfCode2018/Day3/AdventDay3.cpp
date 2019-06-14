@@ -1,17 +1,28 @@
 #include <iostream>
 #include <fstream>
+#include <vector>
 using namespace std;
 
 const int maxSize=1000;
 int main()
 {	char c;
 	ifstream infile;
-	infile.open("C:\\Users\\Jay\\Desktop\\Advent2018\\AdventOfCode2018\\AdventOfCode2018\\Day3\\input.txt");
+	infile.open("C:\\Users\\Jay\\Desktop\\Advent2018\\AdventOfCode2018\\AdventOfCode2018\\Day3\\input1.txt");
 	cout << "Heres"<< endl;
 	int num1,num2,height,width,count;
-	int arr[maxSize][maxSize]={0};// Assign all to zero;
-	string str;
-    infile >> c>> num1>> c >> num1>>c>>num2>> c>> height>>c>> width;
+	//int arr[maxSize][maxSize]={0};// Assign all to zero;
+	vector<int> row;
+	vector <vector<int>> col;
+	for (int x = 0; x < maxSize; x++)
+	{
+		row.push_back(0);
+	}
+	for (int x = 0; x < maxSize; x++)
+	{
+		col.push_back(row);// Initialize a vector of vectors. Essentially 1000 rows of 1000 spaces.
+	}
+
+    infile >> c>> num1>> c >> num1>>c>>num2>> c>> height>>c>> width;// Height and width are the last numbers. num1 and num2 are the coordinates of origin.
 	while (!infile.eof())
 	{
 //#1 @ 265,241: 16x26
@@ -25,7 +36,7 @@ int main()
 		{
 			for(int y=0;y<width;y++)
 			{
-				arr[num1+x][num2+y]++;
+				col[num1+x][num2+y]++;// Starts at origin and then traverses the row, then comes back to begin another row until all is filled.
 			}
 		}
         infile >> c>> num1>> c >> num1>>c>>num2>> c>> height>>c>> width;
@@ -36,7 +47,7 @@ int main()
 	{
 		for(int x=0; x<maxSize; x++)
 		{
-			if (arr[i][x]>=2)
+			if (col[i][x]>=2)
 			{
 			    count++;
             }
