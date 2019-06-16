@@ -97,7 +97,7 @@ int main()
 							while (arr.at(coord.first-countx).at(coord.second-counter).action == " falls asleep" || arr.at(coord.first).at(coord.second-counter).action == " wakes up")// what if goon is previous month.
 							{
 								counter++;
-								if (coord.second - counter == -1)// CHANGED FROM NEG 1
+								if (coord.second - counter == -1)// Was 0 before. Seems to be error.
 								{
 									coord.second = arr.at(coord.first - countx).size();
 									countx = 1;
