@@ -1,3 +1,4 @@
+
 #include <iostream>
 #include <fstream>
 using namespace std;
@@ -11,9 +12,9 @@ int main()
 		cout << "Fuck" << endl;
 		exit(1);
 	}
-	
+
 	int temp;
-	int total=0;
+	int total = 0;
 
 	while (!infile.eof())
 	{
@@ -21,7 +22,7 @@ int main()
 		temp = (temp / 3) - 2;
 		while (temp > 0)
 		{
-			
+
 			total += temp;
 			temp = (temp / 3) - 2;
 		}
