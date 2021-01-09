@@ -1,6 +1,7 @@
 import re
 import itertools
 class Checker:
+    '''
     byr=False
     iyr=False
     eyr=False
@@ -10,6 +11,7 @@ class Checker:
     pid=False
     cid=False
     counter=0
+    '''
     def __init__(self):
         self.byr=False
         self.iyr=False
@@ -49,19 +51,30 @@ class Checker:
         arr=statement.split(":")
         if arr==['']:
             self.reset()
-        elif(arr[0]=="byr"):
+        elif(arr[0]=="byr" and len(arr[1])==4 and int(arr[1])<=2002 and int(arr[1])>=1920):
             self.byr=True
-        elif arr[0]=="iyr":
+            print(arr[1])
+        elif arr[0]=="iyr" and len(arr[1])==4 and int(arr[1])<=2020 and int(arr[1])>=2010:
             self.iyr=True
-        elif arr[0]=="eyr":
+        elif arr[0]=="eyr"and len(arr[1])==4 and int(arr[1])<=2030 and int(arr[1])>=2020:
             self.eyr=True
         elif arr[0]=="hgt":
-            self.hgt=True
-        elif arr[0]=="hcl":
-            self.hcl=True
-        elif arr[0]=="ecl":
+            if arr[1][-2:]=="cm" and int(arr[1][:-2])>=150 and int(arr[1][:-2])<=193:
+                self.hgt=True
+            elif arr[1][-2:]=="in" and int(arr[1][:-2])>=59 and int(arr[1][:-2])<=76:
+                self.hgt=True
+        elif arr[0]=="hcl" and arr[1][0]=="#":
+            for x in arr[1][1:]:
+                if (x >='a' and x<='f') or (x >='0' and x<='9'):
+                    self.hcl=True
+                else:
+                    return #could cause edge case maybe cosnider rewriting
+        elif arr[0]=="ecl" and (arr[1]=="amb" or arr[1]=="blu" or arr[1]=="brn" or arr[1]=="gry" or arr[1]=="grn" or arr[1]=="hzl"or arr[1]=="oth"):
             self.ecl=True 
-        elif arr[0]=="pid":
+        elif arr[0]=="pid" and len(arr[1])==9:
+            for x in arr[1]:
+                if(x <'0' and x>'9'):
+                    return
             self.pid=True
         elif arr[0]=="cid":
             self.cid=True   
